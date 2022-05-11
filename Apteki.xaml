@@ -1,0 +1,36 @@
+﻿<Page x:Class="FinalTest.Apteki"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalTest"
+      mc:Ignorable="d"
+      Title="Apteki" Height="430.734" Width="764.22">
+
+    <Grid Margin="0,21,0,29">
+        <Grid.Background>
+            <ImageBrush ImageSource="/fon.jpg"></ImageBrush>
+        </Grid.Background>
+        <TextBox x:Name="Search" HorizontalAlignment="Left" FontSize="16" Height="58" Margin="127,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
+        <Button Content="     Поиск&#xD;&#xA;по названию" FontSize="17" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Width="117" Height="58" Click="Search_Click"/>
+        <Button Content="Добавить" FontSize="18" FontWeight="Bold" Name="BTNADD" Click="AddClick" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="352,318,0,0" VerticalAlignment="Top" Width="130" Height="58"/>
+        <Button Click="Back_Click" Content="Удалить" FontSize="18" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="623,318,0,0" VerticalAlignment="Top" Width="130" Height="58"/>
+        <Button Content="Редактировать" FontSize="18" FontWeight="Bold" x:Name="BTNADD_Copy" Click="EditClick" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="482,318,0,0" VerticalAlignment="Top" Width="141" Height="58"/>
+        <Grid HorizontalAlignment="Left" Height="235" Margin="189,95,0,0" VerticalAlignment="Top" Width="379">
+            <DataGrid x:Name="Aptek" AutoGenerateColumns="False" Margin="-119,-30,-79,30">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Код товара" Binding="{Binding goods_id}" ></DataGridTextColumn>
+                    
+                    <DataGridTextColumn Header="Наименование товара" Binding="{Binding goods_name}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Количество товара" Binding="{Binding number_of_goods}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена товара" Binding="{Binding goods_price}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Код производителя" Binding="{Binding manufacturer_id}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Код типа" Binding="{Binding type_id}" ></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+        <Frame x:Name="MainFrame" Margin="0,0,-40,-31"></Frame>
+        
+    </Grid>
+</Page>

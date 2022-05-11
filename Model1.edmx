@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище testModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="client_surname" Type="nchar" MaxLength="40" />
+          <Property Name="client_name" Type="nchar" MaxLength="40" />
+          <Property Name="client_pastname" Type="nchar" MaxLength="40" />
+          <Property Name="client_login" Type="nchar" MaxLength="70" />
+          <Property Name="client_password" Type="nchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="discount_id" />
+          </Key>
+          <Property Name="discount_id" Type="int" Nullable="false" />
+          <Property Name="discount_size" Type="int" />
+          <Property Name="goods_ID" Type="int" />
+          <Property Name="discount_date" Type="date" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="employee_login" Type="nchar" MaxLength="50" />
+          <Property Name="employee_password" Type="nchar" MaxLength="50" />
+          <Property Name="employee_surname" Type="nchar" MaxLength="50" />
+          <Property Name="employee_name" Type="nchar" MaxLength="50" />
+          <Property Name="employee_pastname" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="goods_id" />
+          </Key>
+          <Property Name="goods_id" Type="int" Nullable="false" />
+          <Property Name="goods_name" Type="nchar" MaxLength="50" />
+          <Property Name="number_of_goods" Type="int" />
+          <Property Name="goods_price" Type="money" />
+          <Property Name="manufacturer_id" Type="int" />
+          <Property Name="type_id" Type="int" />
+          <Property Name="goods_image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="manufacturer">
+          <Key>
+            <PropertyRef Name="manufacturer_id" />
+          </Key>
+          <Property Name="manufacturer_id" Type="int" Nullable="false" />
+          <Property Name="manufacturer" Type="nchar" MaxLength="80" />
+          <Property Name="country" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" />
+          <Property Name="order_date" Type="date" />
+          <Property Name="order_status" Type="nchar" MaxLength="50" />
+          <Property Name="order_price" Type="money" />
+          <Property Name="employee_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Order_Detail">
+          <Key>
+            <PropertyRef Name="detail_id" />
+          </Key>
+          <Property Name="order_id" Type="int" />
+          <Property Name="number_of_goods" Type="int" />
+          <Property Name="goods_ID" Type="int" />
+          <Property Name="detail_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="type">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="type" Type="nchar" MaxLength="60" />
+          <Property Name="characteristics" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_discount_goods">
+          <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
+          <End Role="discount" Type="Self.discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="goods_id" />
+            </Principal>
+            <Dependent Role="discount">
+              <PropertyRef Name="goods_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_goods_manufacturer">
+          <End Role="manufacturer" Type="Self.manufacturer" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manufacturer">
+              <PropertyRef Name="manufacturer_id" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="manufacturer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_goods_type">
+          <End Role="type" Type="Self.type" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_client">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Detail_goods">
+          <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
+          <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="goods_id" />
+            </Principal>
+            <Dependent Role="Order_Detail">
+              <PropertyRef Name="goods_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="0..1" />
+          <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="Order_Detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище testModelContainer">
+          <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="discount" EntityType="Self.discount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="goods" EntityType="Self.goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="manufacturer" EntityType="Self.manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Detail" EntityType="Self.Order_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type" EntityType="Self.type" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_discount_goods" Association="Self.FK_discount_goods">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="discount" EntitySet="discount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_goods_manufacturer" Association="Self.FK_goods_manufacturer">
+            <End Role="manufacturer" EntitySet="manufacturer" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_goods_type" Association="Self.FK_goods_type">
+            <End Role="type" EntitySet="type" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_client" Association="Self.FK_order_client">
+            <End Role="client" EntitySet="client" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Detail_goods" Association="Self.FK_Order_Detail_goods">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="Order_Detail" EntitySet="Order_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Detail_order" Association="Self.FK_Order_Detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="Order_Detail" EntitySet="Order_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_employee" Association="Self.FK_order_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="client_surname" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="client_name" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="client_pastname" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="client_login" Type="String" MaxLength="70" FixedLength="true" Unicode="true" />
+          <Property Name="client_password" Type="String" MaxLength="70" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_client" FromRole="client" ToRole="order" />
+        </EntityType>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="discount_id" />
+          </Key>
+          <Property Name="discount_id" Type="Int32" Nullable="false" />
+          <Property Name="discount_size" Type="Int32" />
+          <Property Name="goods_ID" Type="Int32" />
+          <Property Name="discount_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="goods" Relationship="Self.FK_discount_goods" FromRole="discount" ToRole="goods" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="employee_login" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="employee_password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="employee_surname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="employee_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="employee_pastname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_employee" FromRole="employee" ToRole="order" />
+        </EntityType>
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="goods_id" />
+          </Key>
+          <Property Name="goods_id" Type="Int32" Nullable="false" />
+          <Property Name="goods_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="number_of_goods" Type="Int32" />
+          <Property Name="goods_price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="manufacturer_id" Type="Int32" />
+          <Property Name="type_id" Type="Int32" />
+          <Property Name="goods_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="discount" Relationship="Self.FK_discount_goods" FromRole="goods" ToRole="discount" />
+          <NavigationProperty Name="manufacturer" Relationship="Self.FK_goods_manufacturer" FromRole="goods" ToRole="manufacturer" />
+          <NavigationProperty Name="type" Relationship="Self.FK_goods_type" FromRole="goods" ToRole="type" />
+          <NavigationProperty Name="Order_Detail" Relationship="Self.FK_Order_Detail_goods" FromRole="goods" ToRole="Order_Detail" />
+        </EntityType>
+        <EntityType Name="manufacturer">
+          <Key>
+            <PropertyRef Name="manufacturer_id" />
+          </Key>
+          <Property Name="manufacturer_id" Type="Int32" Nullable="false" />
+          <Property Name="manufacturer1" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="goods" Relationship="Self.FK_goods_manufacturer" FromRole="manufacturer" ToRole="goods" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" />
+          <Property Name="order_date" Type="DateTime" Precision="0" />
+          <Property Name="order_status" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="order_price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="employee_id" Type="Int32" />
+          <NavigationProperty Name="client" Relationship="Self.FK_order_client" FromRole="order" ToRole="client" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_order_employee" FromRole="order" ToRole="employee" />
+          <NavigationProperty Name="Order_Detail" Relationship="Self.FK_Order_Detail_order" FromRole="order" ToRole="Order_Detail" />
+        </EntityType>
+        <EntityType Name="Order_Detail">
+          <Key>
+            <PropertyRef Name="detail_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" />
+          <Property Name="number_of_goods" Type="Int32" />
+          <Property Name="goods_ID" Type="Int32" />
+          <Property Name="detail_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="goods" Relationship="Self.FK_Order_Detail_goods" FromRole="Order_Detail" ToRole="goods" />
+          <NavigationProperty Name="order" Relationship="Self.FK_Order_Detail_order" FromRole="Order_Detail" ToRole="order" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="type">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <Property Name="type1" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="characteristics" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="goods" Relationship="Self.FK_goods_type" FromRole="type" ToRole="goods" />
+        </EntityType>
+        <Association Name="FK_order_client">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_discount_goods">
+          <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
+          <End Role="discount" Type="Self.discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="goods_id" />
+            </Principal>
+            <Dependent Role="discount">
+              <PropertyRef Name="goods_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_goods_manufacturer">
+          <End Role="manufacturer" Type="Self.manufacturer" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manufacturer">
+              <PropertyRef Name="manufacturer_id" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="manufacturer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_goods_type">
+          <End Role="type" Type="Self.type" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Detail_goods">
+          <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
+          <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="goods_id" />
+            </Principal>
+            <Dependent Role="Order_Detail">
+              <PropertyRef Name="goods_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="0..1" />
+          <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="Order_Detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="client" EntityType="Self.client" />
+          <EntitySet Name="discount" EntityType="Self.discount" />
+          <EntitySet Name="employee" EntityType="Self.employee" />
+          <EntitySet Name="goods" EntityType="Self.goods" />
+          <EntitySet Name="manufacturer" EntityType="Self.manufacturer" />
+          <EntitySet Name="order" EntityType="Self.order" />
+          <EntitySet Name="Order_Detail" EntityType="Self.Order_Detail" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="type" EntityType="Self.type" />
+          <AssociationSet Name="FK_order_client" Association="Self.FK_order_client">
+            <End Role="client" EntitySet="client" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discount_goods" Association="Self.FK_discount_goods">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="discount" EntitySet="discount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_employee" Association="Self.FK_order_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_goods_manufacturer" Association="Self.FK_goods_manufacturer">
+            <End Role="manufacturer" EntitySet="manufacturer" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_goods_type" Association="Self.FK_goods_type">
+            <End Role="type" EntitySet="type" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Detail_goods" Association="Self.FK_Order_Detail_goods">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="Order_Detail" EntitySet="Order_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Detail_order" Association="Self.FK_Order_Detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="Order_Detail" EntitySet="Order_Detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище testModelContainer" CdmEntityContainer="testEntities">
+          <EntitySetMapping Name="client">
+            <EntityTypeMapping TypeName="testModel.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="client_surname" ColumnName="client_surname" />
+                <ScalarProperty Name="client_name" ColumnName="client_name" />
+                <ScalarProperty Name="client_pastname" ColumnName="client_pastname" />
+                <ScalarProperty Name="client_login" ColumnName="client_login" />
+                <ScalarProperty Name="client_password" ColumnName="client_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="discount">
+            <EntityTypeMapping TypeName="testModel.discount">
+              <MappingFragment StoreEntitySet="discount">
+                <ScalarProperty Name="discount_id" ColumnName="discount_id" />
+                <ScalarProperty Name="discount_size" ColumnName="discount_size" />
+                <ScalarProperty Name="goods_ID" ColumnName="goods_ID" />
+                <ScalarProperty Name="discount_date" ColumnName="discount_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee">
+            <EntityTypeMapping TypeName="testModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="employee_login" ColumnName="employee_login" />
+                <ScalarProperty Name="employee_password" ColumnName="employee_password" />
+                <ScalarProperty Name="employee_surname" ColumnName="employee_surname" />
+                <ScalarProperty Name="employee_name" ColumnName="employee_name" />
+                <ScalarProperty Name="employee_pastname" ColumnName="employee_pastname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="goods">
+            <EntityTypeMapping TypeName="testModel.goods">
+              <MappingFragment StoreEntitySet="goods">
+                <ScalarProperty Name="goods_id" ColumnName="goods_id" />
+                <ScalarProperty Name="goods_name" ColumnName="goods_name" />
+                <ScalarProperty Name="number_of_goods" ColumnName="number_of_goods" />
+                <ScalarProperty Name="goods_price" ColumnName="goods_price" />
+                <ScalarProperty Name="manufacturer_id" ColumnName="manufacturer_id" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="goods_image" ColumnName="goods_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="manufacturer">
+            <EntityTypeMapping TypeName="testModel.manufacturer">
+              <MappingFragment StoreEntitySet="manufacturer">
+                <ScalarProperty Name="manufacturer_id" ColumnName="manufacturer_id" />
+                <ScalarProperty Name="manufacturer1" ColumnName="manufacturer" />
+                <ScalarProperty Name="country" ColumnName="country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order">
+            <EntityTypeMapping TypeName="testModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="order_price" ColumnName="order_price" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Detail">
+            <EntityTypeMapping TypeName="testModel.Order_Detail">
+              <MappingFragment StoreEntitySet="Order_Detail">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="number_of_goods" ColumnName="number_of_goods" />
+                <ScalarProperty Name="goods_ID" ColumnName="goods_ID" />
+                <ScalarProperty Name="detail_id" ColumnName="detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="testModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type">
+            <EntityTypeMapping TypeName="testModel.type">
+              <MappingFragment StoreEntitySet="type">
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="type1" ColumnName="type" />
+                <ScalarProperty Name="characteristics" ColumnName="characteristics" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

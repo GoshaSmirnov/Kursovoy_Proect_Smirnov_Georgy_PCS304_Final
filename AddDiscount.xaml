@@ -1,0 +1,27 @@
+﻿<Page x:Class="FinalTest.AddDiscount"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddDiscount">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/fon.jpg"></ImageBrush>
+        </Grid.Background>
+        <Grid HorizontalAlignment="Left" Height="353" Margin="10,43,0,0" VerticalAlignment="Top" Width="743">
+            <Button Content="Сохранить" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="321,283,0,0" VerticalAlignment="Top" Width="125" Click="Button_Click" Height="60"/>
+            <ComboBox HorizontalAlignment="Left" Height="48" x:Name="ComboName"  Text="{Binding goods.goods_name}" DisplayMemberPath="goods_name" Margin="522,39,0,0" Grid.RowSpan="1" VerticalAlignment="Top" Width="178"/>
+            <TextBox x:Name="GoodsNameText" Text="{Binding discount_size}" HorizontalAlignment="Left" Height="46" Margin="522,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" FontSize="18"/>
+            <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding discount_date}" Margin="522,196,0,0" VerticalAlignment="Top" Height="56" Width="178"/>
+        </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="442,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="90" FontSize="18" Text="Товар"/>
+        <TextBlock HorizontalAlignment="Left" Margin="442,159,0,0" TextWrapping="Wrap" Text="Размер скидки" VerticalAlignment="Top" Height="45" Width="104" FontSize="18" RenderTransformOrigin="0.423,0.303"/>
+        <TextBlock HorizontalAlignment="Left" Margin="442,233,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="95" FontSize="18" Text="Дата скидки"/>
+
+
+    </Grid>
+</Page>

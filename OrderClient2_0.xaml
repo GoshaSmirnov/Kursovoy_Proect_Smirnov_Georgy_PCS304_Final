@@ -1,0 +1,54 @@
+﻿<Page x:Class="FinalTest.OrderClient2_0"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrderClient2_0">
+
+    <Grid>
+        
+        <ListView Background="#FF91D8D8" Name="LViewGoods" Margin="90,10,93,58">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="20" Width="550">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Width="300" Height="220" Grid.Row="1" Grid.Column="0" Stretch="UniformToFill" HorizontalAlignment="Left" Margin="5">
+                            <Image.Source>
+                                <Binding Path="goods_image">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>/Resurs/no_photos.jpg</ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                        <TextBlock Text="{Binding goods_name}" FontFamily="Impact" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" Margin="5 5" FontWeight="Bold" FontSize="32" Grid.Row="0"></TextBlock>
+                        <TextBlock Text="{Binding goods_price, StringFormat={}{0:N2} РУБ}" FontFamily="Timew New Roman" Grid.Row="3"  FontSize="22" FontWeight="ExtraLight" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Text="{Binding type.type1}" FontFamily="Timew New Roman" Grid.Row="0" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Text="{Binding number_of_goods, StringFormat={}{0:N2} на складе}" FontFamily="Timew New Roman" Grid.Row="4" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Text="{Binding type.characteristics}" FontFamily="Timew New Roman" Grid.Row="1"  Grid.Column="1" FontSize="14" HorizontalAlignment="Left" Width="200" Height="200" TextWrapping="Wrap"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Frame x:Name="MainFrame" HorizontalAlignment="Left" Width="800" Margin="10,10,-10,63"/>
+        <TextBox x:Name="Search" HorizontalAlignment="Left" FontSize="16" Height="58" Margin="117,392,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289"/>
+        <Button Content="     Поиск&#xD;&#xA;по названию" FontSize="17" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="0,392,0,0" VerticalAlignment="Top" Width="117" Height="58" Click="Search_Click"/>
+        <Button Content="Добавить" FontSize="18" FontWeight="Bold" Name="BTNADD" Click="AddClick" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="540,392,0,0" VerticalAlignment="Top" Width="130" Height="58"/>
+        <Button Content="Сделать заказ" FontSize="18" FontWeight="Bold" x:Name="BTNADD_Copy" Click="SaveClick" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="670,392,0,0" VerticalAlignment="Top" Width="130" Height="58" RenderTransformOrigin="0.677,1.19"/>
+
+    </Grid>
+</Page>

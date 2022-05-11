@@ -1,0 +1,33 @@
+﻿<Page x:Class="FinalTest.table"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="table">
+
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/fon.jpg"></ImageBrush>
+        </Grid.Background>
+        <Grid  HorizontalAlignment="Left" Height="288" Margin="97,88,0,0" VerticalAlignment="Top" Width="601">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16*"/>
+                <ColumnDefinition Width="585*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Скидки" Click="Diskount_Click"  FontSize="18" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="459.898,59,0,0" VerticalAlignment="Top" Width="95" Height="50" Grid.Column="1"/>
+            <Button Content="Клиенты" Click="Client_Click" FontSize="18" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="15.898,59,0,0" VerticalAlignment="Top" Width="95" Height="50" Grid.Column="1"/>
+            <Button Content="Сотрудники" Click="Employee_Click" FontSize="18" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="15.898,162,0,0" VerticalAlignment="Top" Width="95" Height="50" Grid.Column="1"/>
+            <Button Content="Товары" Click="Goods_Click" FontSize="18" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="164.898,59,0,0" VerticalAlignment="Top" Width="95" Height="50" Grid.Column="1"/>
+            <Button Content="Производители" FontSize="18" Click="Manufacture_Click" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="164.898,162,0,0" VerticalAlignment="Top" Width="95" Height="50" Grid.Column="1"/>
+            <Button Content="Заказы" FontSize="18" Click="Order_Click" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="314.898,59,0,0" VerticalAlignment="Top" Width="95" Height="50" Grid.Column="1"/>
+            <Button Content="Детали &#xD;&#xA;заказа" Click="Detail_Click" FontSize="18" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="314.898,162,0,0" VerticalAlignment="Top" Width="95" Height="50" Grid.Column="1" />
+            <Button Content="Типы" Click="Type_Click" FontSize="18" FontWeight="Bold" Background="#FF48BFEC" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="50" Margin="461.898,164,0,0" Grid.Column="1"/>
+
+            <Frame x:Name="MainFrame2" Margin="-61,-86,-97,-72" Grid.ColumnSpan="2" ></Frame>
+        </Grid>
+
+    </Grid>
+</Page>

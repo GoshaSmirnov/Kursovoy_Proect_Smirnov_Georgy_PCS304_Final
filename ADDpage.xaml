@@ -1,0 +1,29 @@
+﻿<Page x:Class="FinalTest.ADDpage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ADDpage">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/fon.jpg"></ImageBrush>
+        </Grid.Background>
+        <Grid HorizontalAlignment="Left" Height="353" Margin="10,43,0,0" VerticalAlignment="Top" Width="743">
+            <TextBlock HorizontalAlignment="Left" Margin="31,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="90" FontSize="18" Text="производитель:"/>
+            <TextBlock HorizontalAlignment="Left" Margin="322,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="90" Text="цена" FontSize="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="322,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="90" Text="тип:" FontSize="18" RenderTransformOrigin="0.535,0.181"/>
+            <Button Content="Сохранить" Background="#FF48BFEC" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="287,265,0,0" VerticalAlignment="Top" Width="125" Click="Button_Click" Height="60"/>
+        </Grid>
+        <TextBox x:Name="GoodsNameText" Text="{Binding goods_name}" HorizontalAlignment="Left" Height="46" Margin="131,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="41,71,0,0" TextWrapping="Wrap" Text="Название " VerticalAlignment="Top" Height="45" Width="90" FontSize="18" RenderTransformOrigin="0.423,0.303"/>
+        <TextBlock HorizontalAlignment="Left" Margin="36,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="95" Text="количество" FontSize="18"/>
+        <TextBox x:Name="GoodsNumberText" Text="{Binding number_of_goods}" HorizontalAlignment="Left" Height="48" Margin="131,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" FontSize="18" RenderTransformOrigin="0.476,-0.693"/>
+        <TextBox x:Name="GoodsPriceText" Text="{Binding goods_price}" HorizontalAlignment="Left" Height="48" Margin="420,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" FontSize="18"/>
+        <ComboBox HorizontalAlignment="Left" Height="48" x:Name="ComboType"  Text="{Binding type.type1}" DisplayMemberPath="type1" Margin="420,147,0,0" Grid.RowSpan="1" VerticalAlignment="Top" Width="178"/>
+        <ComboBox HorizontalAlignment="Left" Height="48" x:Name="ManufactureCombo"  Text="{Binding manufacturer.manufacturer1}" DisplayMemberPath="manufacturer1" Margin="131,147,0,0" Grid.RowSpan="1" VerticalAlignment="Top" Width="178"/>
+    </Grid>
+</Page>

@@ -1,0 +1,23 @@
+﻿<Page x:Class="FinalTest.ManufacturerADD"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ManufacturerADD">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/fon.jpg"></ImageBrush>
+        </Grid.Background>
+        <Grid HorizontalAlignment="Left" Height="353" Margin="10,43,0,0" VerticalAlignment="Top" Width="743">
+            <Button Content="Сохранить" Background="#FF48BFEC" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="516,283,0,0" VerticalAlignment="Top" Width="125" Click="Button_Click" Height="60"/>
+        </Grid>
+        <TextBox x:Name="GoodsNameText" Text="{Binding manufacturer1}" HorizontalAlignment="Left" Height="46" Margin="480,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="345,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="130" FontSize="18" RenderTransformOrigin="0.423,0.303"><Run Text="Производитель"/><Run Text=" "/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="413,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="95" FontSize="18"><Run Text="С"/><Run Text="трана"/></TextBlock>
+        <TextBox x:Name="GoodsNumberText" Text="{Binding country}" HorizontalAlignment="Left" Height="48" Margin="480,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" FontSize="18" RenderTransformOrigin="0.476,-0.693"/>
+    </Grid>
+</Page>

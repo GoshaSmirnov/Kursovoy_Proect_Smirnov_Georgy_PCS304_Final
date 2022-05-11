@@ -1,0 +1,33 @@
+﻿<Page x:Class="FinalTest.registration"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="registration">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/fon.jpg"></ImageBrush>
+        </Grid.Background>
+        <Grid HorizontalAlignment="Left" Height="320" Margin="10,25,0,0" VerticalAlignment="Top" Width="771">
+            <TextBlock HorizontalAlignment="Left" Margin="21,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="90" Text="Отчество" FontSize="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="300,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="90" Text="Логин" FontSize="18"/>
+            <PasswordBox Name="ClientPasswordText" PasswordChar="*" HorizontalAlignment="Left" Height="46" Margin="383,153,0,0" VerticalAlignment="Top" Width="160" FontSize="18"/>
+            <TextBlock HorizontalAlignment="Left" FontSize="14" Margin="557,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="192"><Run Text="Параметры пароля:"/><LineBreak/><Run Text="*длина 6+ символов"/><LineBreak/><Run Text="*большие и маленькие буквы"/><LineBreak/><Run Text="*цифры"/></TextBlock>
+        </Grid>
+        <TextBox x:Name="ClientSurnameText" Text="{Binding client_surname}" HorizontalAlignment="Left" Height="48" Margin="136,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" FontSize="18"/>
+        <TextBox x:Name="ClientNameText" Text="{Binding client_name}" HorizontalAlignment="Left" Height="46" Margin="136,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="36,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="90" Text="Фамилия" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="36,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="90" FontSize="18" RenderTransformOrigin="0.423,0.303"><Run Text="И"/><Run Text="мя"/></TextBlock>
+        <Button Content="Зарегестрироваться" Background="#FF48BFEC" HorizontalAlignment="Left" Margin="429,265,0,0" VerticalAlignment="Top" Width="125" Click="Button_Click" Height="60"/>
+        <TextBox x:Name="ClientLoginText" Text="{Binding client_login}" HorizontalAlignment="Left" Height="46" Margin="394,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" FontSize="18"/>
+        <TextBox x:Name="ClientPastNameText" Text="{Binding client_pastname}" HorizontalAlignment="Left" Height="46" Margin="136,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="307,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="90" Text="Пароль" FontSize="18"/>
+
+
+    </Grid>
+</Page>
+
